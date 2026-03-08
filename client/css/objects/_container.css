@@ -1,0 +1,10 @@
+/* Layout container */
+.o-container {
+    width: min(1200px, 96vw);
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.o-container.is-wide {
+    width: min(1480px, 100vw);
+}

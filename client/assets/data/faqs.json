@@ -1,0 +1,124 @@
+{
+  "faqs": [
+    {
+      "id": 1,
+      "question": "¿Cómo puedo reservar una propiedad?",
+      "answer": "Para reservar una propiedad debes seleccionar las fechas disponibles en el calendario, confirmar la cantidad de huéspedes y proceder al pago. Una vez confirmado el pago, recibirás un correo con los detalles de la reserva.",
+      "keywords": ["reservar", "reserva", "calendario", "pago", "confirmación"]
+    },
+    {
+      "id": 2,
+      "question": "¿Necesito crear una cuenta para reservar?",
+      "answer": "Sí. Es necesario registrarse con correo electrónico válido para poder gestionar reservas, pagos y comunicación con el anfitrión.",
+      "keywords": ["registro", "cuenta", "usuario", "crear cuenta"]
+    },
+    {
+      "id": 3,
+      "question": "¿Cómo funciona el pago?",
+      "answer": "El pago se realiza en línea mediante los métodos habilitados en la plataforma. El importe total incluye el precio por noche, posibles cargos adicionales y comisiones de servicio.",
+      "keywords": ["pago", "métodos de pago", "tarjeta", "importe total"]
+    },
+    {
+      "id": 4,
+      "question": "¿Puedo cancelar una reserva?",
+      "answer": "Sí. La cancelación dependerá de la política establecida para cada propiedad. Algunas permiten reembolso total, parcial o no reembolsable según la anticipación con la que canceles.",
+      "keywords": ["cancelar", "cancelación", "reembolso", "política"]
+    },
+    {
+      "id": 5,
+      "question": "¿Cómo sé si la propiedad está disponible?",
+      "answer": "Cada propiedad cuenta con un calendario actualizado en tiempo real que indica las fechas disponibles y ocupadas.",
+      "keywords": ["disponibilidad", "fechas", "calendario", "ocupado"]
+    },
+    {
+      "id": 6,
+      "question": "¿Qué sucede si el anfitrión cancela mi reserva?",
+      "answer": "En caso de cancelación por parte del anfitrión, se ofrecerá reembolso completo o alternativa disponible similar, según las políticas de la plataforma.",
+      "keywords": ["anfitrión", "cancelación", "reembolso", "alternativa"]
+    },
+    {
+      "id": 7,
+      "question": "¿Cómo me comunico con el anfitrión?",
+      "answer": "Una vez realizada la reserva, podrás comunicarte directamente mediante el sistema de mensajería interno de la plataforma.",
+      "keywords": ["mensaje", "chat", "contactar", "anfitrión"]
+    },
+    {
+      "id": 8,
+      "question": "¿Qué incluye el precio por noche?",
+      "answer": "El precio por noche cubre el uso de la propiedad durante el período reservado. Algunos servicios adicionales pueden tener costos extra, detallados en el anuncio.",
+      "keywords": ["precio", "noche", "servicios", "costos adicionales"]
+    },
+    {
+      "id": 9,
+      "question": "¿Se permite llevar mascotas?",
+      "answer": "Depende de cada propiedad. En la descripción se especifica si se admiten mascotas y bajo qué condiciones.",
+      "keywords": ["mascotas", "perros", "animales", "condiciones"]
+    },
+    {
+      "id": 10,
+      "question": "¿Qué hago si tengo un problema durante mi estadía?",
+      "answer": "Debes comunicarte primero con el anfitrión. Si el inconveniente no se resuelve, puedes contactar al soporte de la plataforma para asistencia.",
+      "keywords": ["problema", "soporte", "ayuda", "estadía"]
+    },
+    {
+      "id": 11,
+      "question": "¿Cómo puedo modificar mi reserva?",
+      "answer": "Puedes solicitar modificaciones desde tu panel de usuario, sujeto a disponibilidad y aprobación del anfitrión.",
+      "keywords": ["modificar", "cambiar reserva", "editar fechas"]
+    },
+    {
+      "id": 12,
+      "question": "¿Qué métodos de pago se aceptan?",
+      "answer": "La plataforma acepta tarjetas de crédito, débito y otros métodos digitales habilitados en la sección de pagos.",
+      "keywords": ["tarjeta", "crédito", "débito", "pago digital"]
+    },
+    {
+      "id": 13,
+      "question": "¿Es seguro pagar en la plataforma?",
+      "answer": "Sí. Todas las transacciones están protegidas mediante sistemas de cifrado y protocolos de seguridad estándar.",
+      "keywords": ["seguridad", "cifrado", "protección", "transacción segura"]
+    },
+    {
+      "id": 14,
+      "question": "¿Cuándo se realiza el cobro?",
+      "answer": "El cobro se realiza en el momento de confirmar la reserva.",
+      "keywords": ["cobro", "momento del pago", "confirmación"]
+    },
+    {
+      "id": 15,
+      "question": "¿Puedo reservar para otra persona?",
+      "answer": "Sí, siempre que los datos del huésped principal estén correctamente indicados en la reserva.",
+      "keywords": ["tercero", "otra persona", "huésped principal"]
+    },
+    {
+      "id": 16,
+      "question": "¿Cómo funcionan los check-in y check-out?",
+      "answer": "Cada propiedad establece horarios específicos de ingreso y salida, los cuales se detallan en la descripción del anuncio.",
+      "keywords": ["check-in", "check-out", "horarios", "ingreso", "salida"]
+    },
+    {
+      "id": 17,
+      "question": "¿Puedo solicitar factura o comprobante?",
+      "answer": "Sí. Una vez confirmado el pago, puedes descargar el comprobante desde tu cuenta.",
+      "keywords": ["factura", "comprobante", "recibo"]
+    },
+    {
+      "id": 18,
+      "question": "¿Qué sucede si daño algo durante mi estadía?",
+      "answer": "El huésped es responsable por los daños ocasionados y puede aplicarse un cargo adicional según evaluación del anfitrión.",
+      "keywords": ["daños", "responsabilidad", "cargo adicional"]
+    },
+    {
+      "id": 19,
+      "question": "¿Las propiedades están verificadas?",
+      "answer": "Las propiedades publicadas pasan por un proceso de validación básica para garantizar información clara y coherente.",
+      "keywords": ["verificación", "validación", "seguridad"]
+    },
+    {
+      "id": 20,
+      "question": "¿Cómo puedo convertirme en anfitrión?",
+      "answer": "Debes registrarte, completar el perfil y publicar tu propiedad con fotos, descripción y condiciones. El equipo revisará la información antes de su publicación.",
+      "keywords": ["anfitrión", "publicar propiedad", "registro anfitrión"]
+    }
+  ]
+}

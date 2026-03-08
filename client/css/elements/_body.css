@@ -1,0 +1,19 @@
+/* Base body styles */
+body {
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        sans-serif;
+    font-size: var(--fs-base);
+    line-height: 1.6;
+    background-color: #f7f7f7;
+    color: #1f2933;
+    padding-top: 170px; /* espacio para header fijo */
+}
+
+/* Ajuste de desplazamiento al navegar a anclas/ids */
+*[id] {
+    scroll-margin-top: 160px;
+}
+

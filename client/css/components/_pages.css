@@ -1,0 +1,874 @@
+.js-view {
+    display: block;
+}
+
+.js-view[hidden] {
+    display: none !important;
+}
+
+.c-panel {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.c-panel h2 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: #0f172a;
+}
+
+.c-panel p {
+    margin: 0 0 0.75rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.c-about {
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) minmax(280px, 1.2fr);
+    gap: 1.25rem;
+    align-items: center;
+}
+
+.c-about__media img {
+    width: 100%;
+    display: block;
+    border-radius: 14px;
+    object-fit: cover;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.c-about__content h2 {
+    margin-top: 0;
+}
+
+.c-about__content p {
+    margin-bottom: 0.85rem;
+}
+
+.c-panel--split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.c-contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.c-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.65rem 1.05rem;
+    border-radius: 12px;
+    background: #016184;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid #111827;
+    transition: all 0.2s ease;
+}
+
+.c-btn:hover {
+    background: #014a7b;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
+}
+
+.c-btn--ghost {
+    background: #fff;
+    color: #111827;
+    border-color: #d1d5db;
+}
+
+.c-btn--ghost:hover {
+    background: #016184;
+    color: #fff;
+    border-color: #014a7b;
+}
+
+@media (max-width: 1279px) {
+    .u-desktop-only {
+        display: none !important;
+    }
+}
+
+.c-btn--mail {
+    position: relative;
+    padding-left: 2.6rem;
+}
+
+.c-btn--mail::before {
+    content: "";
+    position: absolute;
+    left: 0.9rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21 8.25v7.5A2.25 2.25 0 0 1 18.75 18h-13.5A2.25 2.25 0 0 1 3 15.75v-7.5A2.25 2.25 0 0 1 5.25 6h13.5A2.25 2.25 0 0 1 21 8.25Zm0 0L12 13.5 3 8.25'/%3E%3C/svg%3E");
+}
+
+.c-btn--whatsapp {
+    background: #029438;
+    color: #fff;
+    border-color: #026d27;
+    position: relative;
+    padding-left: 2.6rem;
+}
+
+.c-btn--whatsapp::before {
+    content: "";
+    position: absolute;
+    left: 0.9rem;
+    width: 1rem;
+    height: 1rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23fff' d='M16 .4A15.6 15.6 0 0 0 .4 16c0 2.75.72 5.43 2.1 7.78L.31 31.69l8.07-2.12A15.55 15.55 0 0 0 16 31.6 15.6 15.6 0 0 0 31.6 16 15.6 15.6 0 0 0 16 .4m0 28.26a12.7 12.7 0 0 1-6.48-1.77l-.46-.27-4.79 1.26 1.28-4.67-.3-.48A12.7 12.7 0 0 1 3.3 16 12.7 12.7 0 0 1 16 3.3 12.7 12.7 0 0 1 28.7 16 12.7 12.7 0 0 1 16 28.66m7-9.34c-.38-.19-2.26-1.1-2.61-1.23-.35-.13-.6-.19-.86.19-.26.38-1 1.23-1.23 1.48-.23.26-.45.29-.83.1-.38-.19-1.6-.59-3.05-1.88-1.13-1-1.88-2.26-2.11-2.64-.23-.38-.02-.59.17-.78.18-.18.38-.45.57-.67.19-.23.26-.38.39-.64.13-.26.06-.48-.03-.67-.1-.19-.86-2.07-1.18-2.84-.31-.75-.62-.65-.86-.66h-.74c-.26 0-.67.1-1.02.48-.35.38-1.34 1.31-1.34 3.19 0 1.87 1.37 3.67 1.57 3.92.19.26 2.7 4.13 6.55 5.63.92.4 1.63.64 2.19.82.92.29 1.75.25 2.41.15.74-.11 2.26-.92 2.58-1.81.32-.9.32-1.67.23-1.81-.09-.13-.35-.22-.73-.41'/%3E%3C/svg%3E");
+}
+
+.c-btn--whatsapp:hover {
+    background: #00782a;
+    border-color: #18a84d;
+}
+
+.c-auth-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.c-form {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.c-form--stack label {
+    display: grid;
+    gap: 0.35rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.c-form--stack input {
+    padding: 0.65rem 0.75rem;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background: #f8fafc;
+}
+
+.c-form--stack input:focus {
+    outline: 2px solid #2563eb;
+    background: #fff;
+}
+
+.c-form__feedback {
+    min-height: 20px;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.c-form__feedback.is-error {
+    color: #b91c1c;
+}
+
+.c-form__feedback.is-success {
+    color: #15803d;
+}
+
+.c-modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 1200;
+}
+
+.c-modal[hidden] {
+    display: none !important;
+}
+
+.c-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+}
+
+.c-modal__dialog {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: min(420px, 92vw);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    border: 1px solid #e5e7eb;
+    z-index: 1;
+}
+
+.c-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.c-modal__close {
+    border: none;
+    background: transparent;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #334155;
+    line-height: 1;
+}
+
+.c-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.c-panel--admin {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+}
+
+.c-table--grid {
+    width: 100%;
+}
+
+.c-table--grid table {
+    width: 100%;
+    border-collapse: collapse;
+    display: block;
+}
+
+.c-table--grid thead {
+    display: grid;
+    margin-bottom: 0.35rem;
+}
+.c-table--grid thead tr {
+    display: grid;
+    grid-template-columns:
+        minmax(70px, 0.9fr) /* ID */
+        minmax(200px, 1.4fr) /* Propiedad / Nombre */
+        minmax(180px, 1.2fr) /* Huésped / Email */
+        minmax(220px, 1.4fr) /* Contacto / Teléfono */
+        minmax(170px, 1.1fr) /* Check-in / País */
+        minmax(170px, 1.1fr) /* Check-out / Ciudad */
+        minmax(90px, 0.8fr) /* Huéspedes / Usuario */
+        minmax(170px, 1fr) /* Creada / Registro */
+        minmax(90px, 0.7fr); /* Acciones */
+    gap: 0.5rem 0.75rem;
+}
+.c-table--grid tbody {
+    display: grid;
+    gap: 0.75rem;
+}
+.c-table--grid tbody tr {
+    display: grid;
+    grid-template-columns:
+        minmax(70px, 0.9fr)
+        minmax(200px, 1.4fr)
+        minmax(180px, 1.2fr)
+        minmax(220px, 1.4fr)
+        minmax(170px, 1.1fr)
+        minmax(170px, 1.1fr)
+        minmax(90px, 0.8fr)
+        minmax(170px, 1fr)
+        minmax(90px, 0.7fr);
+    gap: 0.5rem 0.75rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f8fafc;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+.c-table--grid thead th {
+    text-align: left;
+    font-size: 0.92rem;
+    color: #475569;
+    padding: 0 0 0.35rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+.c-table--grid tbody tr td {
+    margin: 0;
+    padding: 0;
+    font-size: 0.95rem;
+    color: #0f172a;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.c-table--grid .c-table__cell {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.c-table--grid .c-table__cell:last-child {
+    text-align: center;
+    overflow: visible;
+}
+
+/* Etiquetas móvil */
+.c-table__label {
+    display: none;
+    font-weight: 600;
+    color: var(--text-secondary, #52616b);
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+}
+@media (max-width: 1280px) {
+    .c-table--grid thead {
+        display: none;
+    }
+    .c-table--grid tbody tr {
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+    }
+    .c-table__cell {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 8px 12px;
+        white-space: normal;
+    }
+    .c-table__label {
+        display: block;
+    }
+}
+@media (max-width: 720px) {
+    .c-table--grid tbody tr {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Botón eliminar con aspa */
+.c-btn--danger.c-btn--icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    padding: 0;
+    border-radius: 50%;
+    background: #d9534f;
+    border: 1px solid #c6443f;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.c-btn--danger.c-btn--icon::before,
+.c-btn--danger.c-btn--icon::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+}
+.c-btn--danger.c-btn--icon::before {
+    transform: rotate(45deg);
+}
+.c-btn--danger.c-btn--icon::after {
+    transform: rotate(-45deg);
+}
+.c-btn--danger.c-btn--icon:hover {
+    background: #c6443f;
+    border-color: #b53a34;
+}
+
+.flatpickr-day.disabled,
+.flatpickr-day.disabled:hover,
+.flatpickr-day.is-reserved {
+    color: #b91c1c !important;
+    background: #fee2e2 !important;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
+@media (max-width: 1280px) {
+    .c-table--grid tbody tr {
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+    }
+    .c-table--grid thead {
+        display: none;
+    }
+
+    .c-table--grid tbody tr td {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.1rem;
+        white-space: normal;
+    }
+
+    .c-cell__label {
+        display: inline-block;
+    }
+
+    .c-cell__value,
+    .c-cell__value--stack {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 720px) {
+    .c-table--grid tbody tr {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .c-about {
+        grid-template-columns: 1fr;
+    }
+    .c-about__media img {
+        max-height: 260px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 720px) {
+    .c-panel--split {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .c-contact-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .c-contact-actions .c-btn {
+        width: 100%;
+        max-width: 420px;
+        justify-content: center;
+    }
+
+    .c-navbar__nav {
+        flex-wrap: wrap;
+    }
+}
+
+.u-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: bottom;
+}
+
+.u-mono {
+    font-family:
+        ui-monospace, SFMono-Regular, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+        monospace;
+    letter-spacing: 0.01em;
+}
+
+.u-number {
+    text-align: right;
+    display: inline-block;
+    min-width: 2ch;
+}
+
+.c-panel__header--sub {
+    margin-top: 12px;
+}
+
+.c-stats {
+    display: grid;
+    gap: 12px;
+    margin: 12px 0 20px;
+}
+
+.c-stats--grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.c-stat {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.c-stat__label {
+    font-size: 0.85rem;
+    color: #52616b;
+    margin: 0 0 4px;
+}
+
+.c-stat__value {
+    font-size: 1.4rem;
+    margin: 4px 0 0;
+}
+
+.c-stat__note {
+    margin: 0.1rem 0 0;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.c-alert {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+}
+
+.c-alert--warn {
+    background: #fff7ed;
+    border-color: #fdba74;
+    color: #9a3412;
+}
+
+.c-chat-launcher {
+    position: fixed;
+    right: 30px;
+    bottom: 150px;
+    z-index: 1400;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.c-chat-launcher__btn {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: #fff url("/assets/img/stylo-bot.png") center/cover no-repeat;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.c-chat-launcher__btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.22);
+}
+
+.c-chat-launcher__tooltip {
+    background: #111827;
+    color: #f8fafc;
+    padding: 0.55rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    max-width: 220px;
+    line-height: 1.35;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.c-chat-launcher:hover .c-chat-launcher__tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.c-chat {
+    position: fixed;
+    right: 30px;
+    bottom: 230px;
+    width: 480px;
+    max-width: calc(100vw - 40px);
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+}
+
+.c-chat__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.c-chat__close {
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #475569;
+}
+
+.c-chat__messages {
+    max-height: 360px;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: linear-gradient(180deg, #f8fafc 0%, #fff 60%);
+}
+
+.c-chat__message {
+    padding: 0.65rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    max-width: 90%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+    white-space: pre-wrap;
+}
+
+.c-chat__message--user {
+    align-self: flex-end;
+    background: #111827;
+    color: #fff;
+}
+
+.c-chat__message--bot {
+    align-self: flex-start;
+    background: #eef2ff;
+    color: #0f172a;
+}
+
+.c-chat__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-self: flex-start;
+}
+
+.c-chat__action-btn {
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #0f172a;
+    border-radius: 10px;
+    padding: 0.45rem 0.8rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.c-chat__action-btn:hover {
+    background: #eef2ff;
+    border-color: #a5b4fc;
+}
+
+.c-chat__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 0.85rem;
+    border-top: 1px solid #e5e7eb;
+    background: #fff;
+}
+
+.c-chat__form input {
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.95rem;
+}
+
+.c-chat__form button {
+    border: none;
+    background: #111827;
+    color: #fff;
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
+}
+
+/* Eliminamos estilos de métricas/c-stats para volver al estado previo */
+.c-stats,
+.c-stats--grid,
+.c-stat,
+.c-stat__label,
+.c-stat__value,
+.c-stat__note {
+    display: none;
+}
+
+/* Contenedor de tablas admin */
+.c-table__responsive {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Grid de tablas admin (desktop) */
+.c-table--grid thead tr,
+.c-table--grid tbody tr {
+    display: grid;
+    grid-template-columns:
+        minmax(64px, 0.9fr) /* ID */
+        minmax(180px, 1.3fr) /* Propiedad / Nombre */
+        minmax(160px, 1.1fr) /* Huésped / Email */
+        minmax(190px, 1.2fr) /* Contacto / Teléfono */
+        minmax(150px, 1fr) /* Check-in / País */
+        minmax(150px, 1fr) /* Check-out / Ciudad */
+        minmax(80px, 0.7fr) /* Huéspedes / Usuario */
+        minmax(150px, 1fr) /* Creada / Registro */
+        minmax(70px, 0.6fr); /* Acciones */
+    gap: 0.45rem 0.65rem;
+}
+
+.c-table--grid tbody tr {
+    padding: 0.85rem 0.95rem;
+}
+
+.c-table--grid .c-table__cell {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Última columna sin recorte para el botón */
+.c-table--grid .c-table__cell:last-child {
+    text-align: center;
+    overflow: visible;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+    .c-table--grid thead {
+        display: none;
+    }
+    .c-table--grid tbody tr {
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+    }
+    .c-table__cell {
+        white-space: normal;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 720px) {
+    .c-table--grid tbody tr {
+        grid-template-columns: 1fr;
+    }
+}
+
+.c-user-page {
+    padding-top: 1.25rem;
+    padding-bottom: 2rem;
+}
+
+.c-user-reservations {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    padding: 1rem;
+}
+
+.c-user-reservations .c-panel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.c-user-reservations .c-panel__title h2 {
+    margin: 0;
+}
+
+.c-user-reservations .c-panel__title p {
+    margin: 0.25rem 0 0;
+    color: #64748b;
+}
+
+.c-user-reservations .c-table__responsive {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.c-user-reservations .c-table {
+    width: 100%;
+}
+
+.c-user-reservations .c-form__feedback {
+    margin: 0.5rem 0 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .c-user-reservations .c-panel__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Mantener únicamente separación de la página usuario.
+   El estilo real del footer debe venir de su archivo original (footer/navbar/layout). */
+.c-user-page + .c-footer {
+    margin-top: 2rem;
+}
+
+/* Mejor contraste en menú usuario */
+.c-user-menu__dropdown a {
+    color: #0f172a; /* texto más oscuro */
+    font-weight: 600;
+}
+
+.c-user-menu__dropdown a:hover,
+.c-user-menu__dropdown a:focus-visible {
+    color: #ffffff;
+    background: #016184; /* consistente con botones primarios */
+    outline: none;
+}
+
+.c-user-menu__dropdown a,
+.c-user-menu__dropdown button {
+    width: 100%;
+    text-align: left;
+    display: block;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #0f172a;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.c-user-menu__dropdown a:hover,
+.c-user-menu__dropdown a:focus-visible,
+.c-user-menu__dropdown button:hover,
+.c-user-menu__dropdown button:focus-visible {
+    color: #fff;
+    background: #016184;
+    outline: none;
+}

@@ -1,0 +1,28 @@
+{
+  "name": "airbnb-clone",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server/server.js",
+    "start": "node server/server.js",
+    "update:images": "node server/scripts/updateImages.js",
+    "reseed": "node server/scripts/reseedPlaceholders.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^4.22.1",
+    "jsonwebtoken": "^9.0.2",
+    "node-fetch": "^3.3.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "description": "Estructura inicial del proyecto.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

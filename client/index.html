@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staylo-Propiedades</title>
+  <link rel="icon" type="image/x-icon" href="/assets/img/logo-light.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <header class="c-navbar">
+    <div class="o-container c-navbar__inner">
+      <a href="/" class="c-navbar__brand">
+        <img
+          id="brand-logo"
+          src="/assets/img/logo-light.png"
+          srcset="/assets/img/logo-light.png 1x, /assets/img/logo-light@2x.png 2x"
+          data-light="/assets/img/logo-light.png"
+          data-light-2x="/assets/img/logo-light@2x.png"
+          data-dark="/assets/img/logo-dark.png"
+          data-dark-2x="/assets/img/logo-dark@2x.png"
+          alt="Alquileres Premium"
+          decoding="async"
+        >
+      </a>
+      <nav id="primary-nav" class="c-navbar__nav" aria-label="Navegación principal">
+        <a href="#" class="c-navbar__link is-active" data-view="home">Inicio</a>
+        <a href="#" class="c-navbar__link" data-view="about">Sobre nosotros</a>
+  <a href="#" class="c-navbar__link" data-view="contact">Contacto</a>
+  <a href="#" class="c-navbar__link" data-view="auth">Registro</a>
+        <a href="#" class="c-navbar__link" data-view="payments">Pagos</a>
+  <a href="#" class="c-navbar__link u-desktop-only" data-view="admin">Admin</a>
+      </nav>
+      <button class="c-navbar__theme" aria-label="Cambiar tema" aria-pressed="false"></button>
+      <button class="c-navbar__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primary-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="o-container">
+    <section id="view-home" class="js-view is-active" aria-label="Propiedades destacadas">
+      <section class="c-filters" id="filters-form">
+        <div>
+          <label for="filter-search">Buscar</label>
+          <input id="filter-search" name="q" type="search" placeholder="Destino o título">
+        </div>
+        <div>
+          <label for="filter-min">Precio mín. (USD)</label>
+          <input id="filter-min" name="min" type="number" min="0" step="10" placeholder="0">
+        </div>
+        <div>
+          <label for="filter-max">Precio máx. (USD)</label>
+          <input id="filter-max" name="max" type="number" min="0" step="10" placeholder="500">
+        </div>
+        <div class="c-filters__actions">
+          <button type="submit">Filtrar</button>
+          <button type="reset">Limpiar</button>
+        </div>
+      </section>
+
+      <section id="properties-grid" class="o-grid"></section>
+    </section>
+
+    <section id="view-about" class="js-view" hidden aria-label="Sobre nosotros">
+      <div class="c-panel c-about">
+        <div class="c-about__media">
+          <img src="assets/img/identity-1.jpg" alt="Equipo de Alquileres Premium" loading="lazy">
+        </div>
+        <div class="c-about__content">
+          <h2>Sobre nosotros</h2>
+          <p>Somos un equipo que conecta viajeros con alojamientos únicos en Miami, combinando curaduría de espacios, soporte humano y tecnología simple para reservar.</p>
+          <p>Buscamos que cada estadía sea fácil, segura y memorable.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-contact" class="js-view" hidden aria-label="Contacto">
+      <div class="c-panel c-panel--split">
+        <div>
+          <h2>Contacto</h2>
+          <p>¿Tienes dudas o necesitas ayuda para reservar? Escríbenos:</p>
+        </div>
+        <div class="c-contact-actions">
+          <a class="c-btn c-btn--mail" href="mailto:hola@alquilerespremium.com">Enviar email</a>
+          <a class="c-btn c-btn--whatsapp" href="https://wa.me/15551234567" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-auth" class="js-view" hidden aria-label="Registro e inicio de sesión">
+      <div class="c-auth-grid">
+        <div class="c-panel">
+          <h2>Registro</h2>
+          <form id="form-register" class="c-form c-form--stack">
+            <label>Nombre completo
+              <input name="full_name" type="text" required minlength="3" placeholder="Tu nombre" />
+            </label>
+            <label>Email
+              <input name="email" type="email" required placeholder="tu@email.com" />
+            </label>
+            <label>Teléfono
+              <input name="phone" type="tel" required placeholder="Ej: +1 555 123 4567" />
+            </label>
+            <label>País
+              <input name="country" type="text" required placeholder="País" />
+            </label>
+            <label>Ciudad
+              <input name="city" type="text" required placeholder="Ciudad" />
+            </label>
+            <label>Usuario
+              <input name="username" type="text" required minlength="3" placeholder="Usuario" />
+            </label>
+            <label>Contraseña
+              <input name="password" type="password" required minlength="6" placeholder="Mínimo 6 caracteres" />
+            </label>
+            <button type="submit" class="c-btn">Crear cuenta</button>
+            <p class="c-form__feedback" id="register-feedback"></p>
+          </form>
+        </div>
+
+        <div class="c-panel">
+          <h2>Iniciar sesión</h2>
+          <form id="form-login" class="c-form c-form--stack">
+            <label>Usuario
+              <input name="username" type="text" required placeholder="Tu usuario" />
+            </label>
+            <label>Contraseña
+              <input name="password" type="password" required minlength="6" placeholder="Tu contraseña" />
+            </label>
+            <button type="submit" class="c-btn">Ingresar</button>
+            <p class="c-form__feedback" id="login-feedback"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-payments" class="js-view" hidden aria-label="Pasarela de pagos (próximamente)">
+      <div class="c-panel">
+        <h2>Pagos y confirmación</h2>
+        <p>Próximamente podrás completar tu pago de forma segura desde esta sección.</p>
+        <ul>
+          <li>Soporte para tarjetas y transferencias (en preparación).</li>
+          <li>Resumen de reserva y monto antes de pagar.</li>
+          <li>Recibo y confirmación inmediata.</li>
+        </ul>
+        <p class="u-muted">Esta sección es un placeholder para integrar la pasarela de pagos.</p>
+      </div>
+    </section>
+
+    <section id="view-admin"
+         class="c-panel c-panel--admin u-desktop-only js-view"
+         hidden>
+      <header class="c-panel__header">
+        <div class="c-panel__title">
+          <h2>Panel admin</h2>
+          <p>Reservas y clientes</p>
+        </div>
+        <div class="c-panel__actions">
+          <button id="btn-reservations-refresh" class="c-btn c-btn--ghost">Actualizar</button>
+          <button id="btn-export-csv" class="c-btn c-btn--ghost">Exportar CSV</button>
+          <button id="btn-export-xlsx" class="c-btn c-btn--ghost">Exportar Excel</button>
+          <button id="btn-admin-logout" class="c-btn c-btn--ghost">Cerrar sesión</button>
+        </div>
+      </header>
+
+      <!-- Tabla de reservas -->
+      <div class="c-table__responsive">
+        <table class="c-table c-table--grid">
+          <thead>
+            <tr class="c-table__row">
+              <th>ID</th><th>Propiedad</th><th>Huesped</th><th>Contacto</th>
+              <th>Check-in</th><th>Check-out</th><th>Huespedes</th><th>Creada</th><th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="reservations-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="c-panel__header c-panel__header--sub">
+        <div>
+          <h3>Clientes registrados</h3>
+          <p>Listado de usuarios</p>
+        </div>
+        <div class="c-panel__actions">
+          <button id="btn-users-refresh" class="c-btn c-btn--ghost">Actualizar</button>
+          <button id="btn-users-export" class="c-btn c-btn--ghost">Exportar CSV</button>
+        </div>
+      </div>
+
+      <!-- Tabla de clientes -->
+      <div class="c-table__responsive">
+        <table class="c-table c-table--grid">
+          <thead>
+            <tr class="c-table__row">
+              <th>ID</th><th>Nombre</th><th>Email</th><th>Teléfono</th>
+              <th>País</th><th>Ciudad</th><th>Usuario</th><th>Registro</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="c-footer">
+    <div class="o-container">
+            <a href="/" class="c-navbar__brand">
+        <img
+          id="brand-logo"
+          src="/assets/img/logo-light.png"
+          srcset="/assets/img/logo-light.png 1x, /assets/img/logo-light@2x.png 2x"
+          data-light="/assets/img/logo-light.png"
+          data-light-2x="/assets/img/logo-light@2x.png"
+          data-dark="/assets/img/logo-dark.png"
+          data-dark-2x="/assets/img/logo-dark@2x.png"
+          alt="Alquileres Premium"
+          decoding="async"
+        >
+      </a>
+      <p>© 2026 Stylo Propiedades.</p>
+      <p>Desarrollado por Willans Junes.</p>
+      <p><a href="https://www.algoritmos.uy" target="_blank" rel="noopener">www.algoritmos.uy</a></p>
+    </div>
+  </footer>
+
+  <div id="admin-modal" class="c-modal" hidden aria-hidden="true" role="dialog" aria-labelledby="admin-modal-title" aria-modal="true">
+    <div class="c-modal__backdrop"></div>
+    <div class="c-modal__dialog">
+      <header class="c-modal__header">
+        <h3 id="admin-modal-title">Acceso administrador</h3>
+        <button type="button" class="c-modal__close" aria-label="Cerrar">×</button>
+      </header>
+      <form id="admin-login-form" class="c-form c-form--stack">
+        <label>Usuario
+          <input id="admin-username" name="username" type="text" required autocomplete="username" />
+        </label>
+        <label>Contraseña
+          <input id="admin-password" name="password" type="password" required autocomplete="current-password" />
+        </label>
+        <div class="c-modal__actions">
+          <button type="button" class="c-btn c-btn--ghost" id="admin-cancel">Cancelar</button>
+          <button type="submit" class="c-btn" id="admin-submit">Confirmar</button>
+        </div>
+        <p class="c-form__feedback" id="admin-feedback"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="user-menu" class="c-user-menu" hidden>
+  <button id="user-menu-toggle" class="c-user-menu__toggle" type="button" aria-expanded="false" title="Mi cuenta">👤</button>
+  <div class="c-user-menu__dropdown" role="menu">
+    <a href="/user.html" role="menuitem">Mis datos</a>
+    <a href="/user.html#reservas" role="menuitem">Mis reservas</a>
+  </div>
+</div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

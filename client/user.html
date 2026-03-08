@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis reservas | Staylo</title>
+  <link rel="icon" type="image/x-icon" href="/assets/img/logo-light.png">
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <header class="c-navbar">
+    <div class="o-container c-navbar__inner">
+      <a href="/" class="c-navbar__brand">
+        <img
+          src="/assets/img/logo-light.png"
+          srcset="/assets/img/logo-light.png 1x, /assets/img/logo-light@2x.png 2x"
+          alt="Staylo"
+          decoding="async"
+        >
+      </a>
+    </div>
+  </header>
+
+  <main class="o-container c-user-page">
+    <section class="c-panel c-user-reservations">
+      <header class="c-panel__header">
+        <div class="c-panel__title">
+          <h2>Mis reservas</h2>
+          <p>Historial de reservas realizadas con tu cuenta.</p>
+        </div>
+        <div class="c-panel__actions">
+          <a href="/" class="c-btn c-btn--ghost">Regresar a inicio</a>
+        </div>
+      </header>
+
+      <div id="user-reservations-feedback" class="c-form__feedback"></div>
+
+      <div class="c-table__responsive">
+        <table class="c-table c-table--grid">
+          <thead>
+            <tr class="c-table__row">
+              <th>ID</th>
+              <th>Propiedad</th>
+              <th>Check-in</th>
+              <th>Check-out</th>
+              <th>Huéspedes</th>
+              <th>Creada</th>
+            </tr>
+          </thead>
+          <tbody id="user-reservations-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="c-footer">
+    <div class="o-container">
+      <a href="/" class="c-navbar__brand">
+        <img
+          id="footer-brand-logo"
+          src="/assets/img/logo-light.png"
+          srcset="/assets/img/logo-light.png 1x, /assets/img/logo-light@2x.png 2x"
+          data-light="/assets/img/logo-light.png"
+          data-light-2x="/assets/img/logo-light@2x.png"
+          data-dark="/assets/img/logo-dark.png"
+          data-dark-2x="/assets/img/logo-dark@2x.png"
+          alt="Alquileres Premium"
+          decoding="async"
+        >
+      </a>
+      <p>© 2026 Stylo Propiedades.</p>
+      <p>Desarrollado por Willans Junes.</p>
+      <p><a href="https://www.algoritmos.uy" target="_blank" rel="noopener">www.algoritmos.uy</a></p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/user.js"></script>
+</body>
+</html>

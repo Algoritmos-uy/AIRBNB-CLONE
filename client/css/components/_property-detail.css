@@ -1,0 +1,126 @@
+.c-property-section {
+    display: grid;
+    grid-template-columns: 1.25fr 0.9fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.c-property-detail {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.c-property-detail__media {
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 320px;
+}
+
+.c-property-detail__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.c-property-detail__head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.c-property-detail__title {
+    margin: 0.15rem 0 0;
+    font-size: 1.4rem;
+    color: #111827;
+}
+
+.c-property-detail__location {
+    margin: 0;
+    color: #6b7280;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.c-property-detail__price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111827;
+    white-space: nowrap;
+}
+
+.c-property-detail__price small {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.c-property-detail__description {
+    color: #374151;
+    line-height: 1.6;
+    margin: 0 0 1.25rem;
+}
+
+.c-property-detail__meta {
+    display: flex;
+    gap: 1rem;
+    color: #6b7280;
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+}
+
+.c-property-video {
+    position: sticky;
+    top: 92px;
+    align-self: start;
+}
+
+.c-property-video__card {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 1rem;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+}
+
+.c-property-reserve {
+    margin-top: 0.9rem;
+}
+
+.c-property-video__title {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    color: #0f172a;
+}
+
+.c-property-video video {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    background: #000;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+@media (max-width: 900px) {
+    .c-property-section {
+        grid-template-columns: 1fr;
+    }
+
+    .c-property-video {
+        position: static;
+    }
+
+    .c-property-detail__media {
+        min-height: 240px;
+    }
+}
