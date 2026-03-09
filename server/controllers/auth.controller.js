@@ -1,118 +1,156 @@
 import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 import { initDB } from '../models/db.js';
 
-const userSessions = new Map(); // token -> user data
-
-function generateToken() {
-	return crypto.randomBytes(24).toString('hex');
-}
-
 function hashPassword(password) {
-	const salt = crypto.randomBytes(16).toString('hex');
-	const hash = crypto.scryptSync(password, salt, 64).toString('hex');
-	return `${salt}:${hash}`;
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.scryptSync(String(password), salt, 64).toString('hex');
+  return `${salt}:${hash}`;
 }
 
 function verifyPassword(password, stored) {
-	if (!stored) return false;
-	const [salt, hashed] = stored.split(':');
-	if (!salt || !hashed) return false;
-	const hash = crypto.scryptSync(password, salt, 64).toString('hex');
-	return crypto.timingSafeEqual(Buffer.from(hash, 'hex'), Buffer.from(hashed, 'hex'));
+  if (!stored) return false;
+  const [salt, hashed] = String(stored).split(':');
+  if (!salt || !hashed) return false;
+
+  const hash = crypto.scryptSync(String(password), salt, 64).toString('hex');
+  return crypto.timingSafeEqual(Buffer.from(hash, 'hex'), Buffer.from(hashed, 'hex'));
 }
 
 function validateRegisterPayload(body) {
-	const errors = [];
-	const required = ['full_name', 'email', 'phone', 'country', 'city', 'username', 'password'];
-	required.forEach((field) => {
-		if (!body?.[field]) errors.push(`El campo ${field} es obligatorio.`);
-	});
+  const errors = [];
+  const required = ['full_name', 'email', 'phone', 'country', 'city', 'username', 'password'];
+  required.forEach((field) => {
+    if (!body?.[field]) errors.push(`El campo ${field} es obligatorio.`);
+  });
 
-	if (body?.password && body.password.length < 6) {
-		errors.push('La contraseña debe tener al menos 6 caracteres.');
-	}
-	if (body?.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
-		errors.push('El email no tiene un formato válido.');
-	}
-	return errors;
+  if (body?.password && String(body.password).length < 6) {
+    errors.push('La contraseña debe tener al menos 6 caracteres.');
+  }
+  if (body?.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(body.email))) {
+    errors.push('El email no tiene un formato válido.');
+  }
+  return errors;
 }
 
 export async function register(req, res) {
-	const payload = req.body || {};
-	const errors = validateRegisterPayload(payload);
-	if (errors.length) {
-		return res.status(400).json({ message: 'Validación fallida', errors });
-	}
+  const payload = req.body || {};
+  const errors = validateRegisterPayload(payload);
+  if (errors.length) {
+    return res.status(400).json({ ok: false, message: 'Validación fallida', errors });
+  }
 
-	const { full_name, email, phone, country, city, username, password } = payload;
+  const full_name = String(payload.full_name || '').trim();
+  const email = String(payload.email || '').trim().toLowerCase();
+  const phone = String(payload.phone || '').trim();
+  const country = String(payload.country || '').trim();
+  const city = String(payload.city || '').trim();
+  const username = String(payload.username || '').trim().toLowerCase();
+  const password = String(payload.password || '');
 
-	try {
-		const db = await initDB();
-		const existing = await db.get('SELECT id FROM users WHERE email = ? OR username = ?', email, username);
-		if (existing) {
-			return res.status(409).json({ message: 'El email o el usuario ya están registrados.' });
-		}
+  try {
+    const db = await initDB();
+    const existing = await db.get(
+      `SELECT id FROM users WHERE lower(email) = ? OR lower(username) = ?`,
+      email,
+      username
+    );
 
-		const password_hash = hashPassword(password);
-		await db.run(
-			`INSERT INTO users (full_name, email, phone, country, city, username, password_hash)
-			 VALUES (?, ?, ?, ?, ?, ?, ?)`
-			,
-			full_name,
-			email,
-			phone,
-			country,
-			city,
-			username,
-			password_hash
-		);
+    if (existing) {
+      return res.status(409).json({ ok: false, message: 'El email o el usuario ya están registrados.' });
+    }
 
-		return res.status(201).json({ message: 'Registro exitoso' });
-	} catch (error) {
-		console.error('Error registrando usuario', error);
-		return res.status(500).json({ message: 'No se pudo registrar el usuario' });
-	}
+    const password_hash = hashPassword(password);
+
+    await db.run(
+      `INSERT INTO users (full_name, email, phone, country, city, username, password_hash)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      full_name,
+      email,
+      phone,
+      country,
+      city,
+      username,
+      password_hash
+    );
+
+    return res.status(201).json({ ok: true, message: 'Registro exitoso.' });
+  } catch (error) {
+    console.error('register error:', error);
+    return res.status(500).json({ ok: false, message: 'No se pudo registrar el usuario.' });
+  }
 }
 
 export async function login(req, res) {
-	const { username, password } = req.body || {};
-	if (!username || !password) {
-		return res.status(400).json({ message: 'Usuario y contraseña son requeridos.' });
-	}
+  const usernameRaw = req.body?.username;
+  const emailRaw = req.body?.email;
+  const password = String(req.body?.password || '');
 
-	try {
-		const db = await initDB();
-		const user = await db.get('SELECT id, username, password_hash, full_name FROM users WHERE username = ?', username);
-		if (!user) {
-			return res.status(401).json({ message: 'Credenciales inválidas.' });
-		}
+  // Acepta username o email
+  const identity = String(usernameRaw || emailRaw || '').trim().toLowerCase();
 
-		const valid = verifyPassword(password, user.password_hash);
-		if (!valid) {
-			return res.status(401).json({ message: 'Credenciales inválidas.' });
-		}
+  if (!identity || !password) {
+    return res.status(400).json({ ok: false, message: 'Usuario/email y contraseña son requeridos.' });
+  }
 
-		const token = generateToken();
-		userSessions.set(token, { id: user.id, username: user.username, full_name: user.full_name });
+  try {
+    const db = await initDB();
 
-		return res.json({
-			message: 'Inicio de sesión exitoso',
-			user: { id: user.id, username: user.username, full_name: user.full_name },
-			token
-		});
-	} catch (error) {
-		console.error('Error en login', error);
-		return res.status(500).json({ message: 'No se pudo iniciar sesión' });
-	}
+    const user = await db.get(
+      `SELECT id, username, email, full_name, password_hash
+       FROM users
+       WHERE lower(username) = ? OR lower(email) = ?`,
+      identity,
+      identity
+    );
+
+    if (!user) {
+      return res.status(401).json({ ok: false, message: 'Credenciales inválidas.' });
+    }
+
+    const valid = verifyPassword(password, user.password_hash);
+    if (!valid) {
+      return res.status(401).json({ ok: false, message: 'Credenciales inválidas.' });
+    }
+
+    const token = jwt.sign(
+      { id: user.id, role: 'user', email: user.email },
+      process.env.JWT_SECRET || 'dev-secret',
+      { expiresIn: process.env.JWT_EXPIRES_IN || '12h' }
+    );
+
+    return res.json({
+      ok: true,
+      data: {
+        token,
+        user: { id: user.id, full_name: user.full_name, email: user.email }
+      }
+    });
+  } catch (error) {
+    console.error('login error:', error);
+    return res.status(500).json({ ok: false, message: 'Error interno de autenticación.' });
+  }
 }
 
 export function requireUser(req, res, next) {
   const auth = req.headers.authorization || '';
-  const token = auth.replace('Bearer ', '').trim();
-  if (!token || !userSessions.has(token)) {
-    return res.status(401).json({ message: 'No autorizado' });
+  const token = auth.startsWith('Bearer ') ? auth.slice(7).trim() : '';
+
+  if (!token) {
+    return res.status(401).json({ ok: false, error: 'No autorizado' });
   }
-  const session = userSessions.get(token);
-  req.user = session;
-  next();
+
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET || 'dev-secret');
+    const userId = payload?.id ?? payload?.userId ?? payload?.sub;
+
+    if (!userId) {
+      return res.status(401).json({ ok: false, error: 'Token sin identidad de usuario' });
+    }
+
+    req.user = { ...payload, userId };
+    return next();
+  } catch {
+    return res.status(401).json({ ok: false, error: 'Token inválido o expirado' });
+  }
 }

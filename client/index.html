@@ -30,10 +30,19 @@
       <nav id="primary-nav" class="c-navbar__nav" aria-label="Navegación principal">
         <a href="#" class="c-navbar__link is-active" data-view="home">Inicio</a>
         <a href="#" class="c-navbar__link" data-view="about">Sobre nosotros</a>
-  <a href="#" class="c-navbar__link" data-view="contact">Contacto</a>
-  <a href="#" class="c-navbar__link" data-view="auth">Registro</a>
+        <a href="#" class="c-navbar__link" data-view="contact">Contacto</a>
+        <a href="#" class="c-navbar__link" data-view="auth">Registro</a>
         <a href="#" class="c-navbar__link" data-view="payments">Pagos</a>
-  <a href="#" class="c-navbar__link u-desktop-only" data-view="admin">Admin</a>
+        <a href="#" class="c-navbar__link u-desktop-only" data-view="admin">Admin</a>
+
+        <div id="user-menu" class="c-user-menu">
+          <button id="user-menu-toggle" class="c-user-menu__toggle" type="button" aria-expanded="false" title="Mi cuenta">👤</button>
+          <div class="c-user-menu__dropdown" role="menu">
+            <a id="user-menu-login" href="#" data-view="auth" role="menuitem">Iniciar sesión</a>
+            <a id="user-menu-reservations" href="./user.html" role="menuitem">Mis reservas</a>
+            <button id="user-menu-logout" type="button" class="c-user-menu__logout" role="menuitem">Cerrar sesión</button>
+          </div>
+        </div>
       </nav>
       <button class="c-navbar__theme" aria-label="Cambiar tema" aria-pressed="false"></button>
       <button class="c-navbar__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primary-nav">
@@ -75,7 +84,9 @@
         </div>
         <div class="c-about__content">
           <h2>Sobre nosotros</h2>
-          <p>Somos un equipo que conecta viajeros con alojamientos únicos en Miami, combinando curaduría de espacios, soporte humano y tecnología simple para reservar.</p>
+          <p>Somos un equipo que conecta viajeros con alojamientos 
+            únicos en Miami, combinando curaduría de espacios, 
+            soporte humano y tecnología simple para reservar.</p>
           <p>Buscamos que cada estadía sea fácil, segura y memorable.</p>
         </div>
       </div>
@@ -252,14 +263,6 @@
       </form>
     </div>
   </div>
-
-  <div id="user-menu" class="c-user-menu" hidden>
-  <button id="user-menu-toggle" class="c-user-menu__toggle" type="button" aria-expanded="false" title="Mi cuenta">👤</button>
-  <div class="c-user-menu__dropdown" role="menu">
-    <a href="/user.html" role="menuitem">Mis datos</a>
-    <a href="/user.html#reservas" role="menuitem">Mis reservas</a>
-  </div>
-</div>
 
   <script type="module" src="js/main.js"></script>
 </body>

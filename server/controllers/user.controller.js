@@ -71,19 +71,47 @@ export async function updateMyProfile(req, res) {
   }
 }
 
+function pick(names, candidates) {
+  return candidates.find(c => names.includes(c)) || null;
+}
+
+async function hasColumn(db, table, col) {
+  const cols = await db.all(`PRAGMA table_info(${table})`);
+  return cols.some((c) => c.name === col);
+}
+
 export async function getMyReservations(req, res) {
   try {
     const db = await initDB();
-    const userId = req.user?.userId;
+    const userId = req.user?.id || req.user?.userId || req.user?.sub;
+    if (!userId) return res.status(401).json({ ok: false, error: 'No autorizado' });
+
+    const hasUserId = await hasColumn(db, 'reservations', 'user_id');
+
+    if (!hasUserId) {
+      // fallback temporal por email mientras migras esquema
+      const user = await db.get(`SELECT email FROM users WHERE id = ?`, [userId]);
+      const rows = await db.all(
+        `SELECT id, property_id, check_in, check_out, guests, created_at
+         FROM reservations
+         WHERE email = ?
+         ORDER BY created_at DESC`,
+        [user?.email || '']
+      );
+      return res.json({ ok: true, data: rows || [] });
+    }
+
     const rows = await db.all(
-      `SELECT id, property_title, check_in, check_out, guests, created_at
+      `SELECT id, property_id, check_in, check_out, guests, created_at
        FROM reservations
        WHERE user_id = ?
        ORDER BY created_at DESC`,
       [userId]
     );
+
     return res.json({ ok: true, data: rows || [] });
-  } catch {
+  } catch (error) {
+    console.error('getMyReservations error:', error);
     return res.status(500).json({ ok: false, error: 'Error interno' });
   }
 }

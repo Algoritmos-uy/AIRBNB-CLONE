@@ -499,6 +499,21 @@ const formatErrors = (result) => {
   return result?.message || 'Ocurrió un error.';
 };
 
+function getLoginPayload(form) {
+  const fd = new FormData(form);
+  const username = String(fd.get('username') || '').trim();
+  const email = String(fd.get('email') || '').trim();
+  const password = String(fd.get('password') || '').trim();
+
+  const identity = (username || email).trim();
+
+  return {
+    username: identity, // backend puede tomar username
+    email: identity,    // backend también puede tomar email
+    password
+  };
+}
+
 function setupAuthForms() {
   registerForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -516,18 +531,27 @@ function setupAuthForms() {
   loginForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     setFeedback(loginFeedback, 'Validando...', true);
-    const payload = serializeForm(loginForm);
+
+    const payload = getLoginPayload(loginForm);
+    console.log('[LOGIN payload]', payload); // temporal
+
     const result = await loginUser(payload);
-    if (result.ok) {
+    console.log('[LOGIN result]', result); // temporal
+
+    // token puede venir anidado según api.js
+    const token = result?.data?.data?.token || result?.data?.token;
+    const user = result?.data?.data?.user || result?.data?.user;
+
+    if (result?.ok && token) {
+      localStorage.setItem('userToken', token);
+      localStorage.setItem('userName', user?.full_name || '');
+      syncUserMenuVisibility();
       setFeedback(loginFeedback, 'Inicio de sesión exitoso.', true);
-      if (result.data?.token) {
-        localStorage.setItem('userToken', result.data.token);
-        localStorage.setItem('userName', result.data?.user?.full_name || result.data?.user?.username || '');
-      }
       loginForm.reset();
-    } else {
-      setFeedback(loginFeedback, result.message || 'Credenciales inválidas.', false);
+      return;
     }
+
+    setFeedback(loginFeedback, result?.message || 'Credenciales inválidas.', false);
   });
 }
 
@@ -955,16 +979,45 @@ function setupBotAssistant() {
 }
 
 const userMenuEl = document.getElementById('user-menu');
-const userShortcutEl = document.getElementById('login-user-shortcut');
+const userMenuLoginLink = document.getElementById('user-menu-login');
+const userMenuReservationsLink = document.getElementById('user-menu-reservations');
+const userMenuLogoutBtn = document.getElementById('user-menu-logout');
 
-function syncUserAccessUI() {
-  const hasSession = Boolean(localStorage.getItem('userToken'));
-  if (userMenuEl) userMenuEl.hidden = !hasSession;
-  if (userShortcutEl) userShortcutEl.hidden = !hasSession;
+function syncUserMenuVisibility() {
+  const token = localStorage.getItem('userToken');
+  const isLogged = Boolean(token && token.trim());
+
+  // Ícono siempre visible
+  if (userMenuEl) userMenuEl.hidden = false;
+
+  // Opciones según sesión
+  if (userMenuLoginLink) userMenuLoginLink.hidden = isLogged;
+  if (userMenuReservationsLink) userMenuReservationsLink.hidden = !isLogged;
+  if (userMenuLogoutBtn) userMenuLogoutBtn.hidden = !isLogged;
 }
 
-syncUserAccessUI();
+userMenuLoginLink?.addEventListener('click', (e) => {
+  e.preventDefault();
+  showView('auth'); // sección registro/login
+});
 
+function logoutUserSession() {
+  localStorage.removeItem('userToken');
+  localStorage.removeItem('userName');
+  syncUserMenuVisibility();
+  showView('home');
+}
+
+userMenuLogoutBtn?.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  logoutUserSession();
+});
+
+// al iniciar app
+syncUserMenuVisibility();
+
+// Inicialización
 loadProperties();
 setupNavigation();
 setupAuthForms();
@@ -972,9 +1025,6 @@ setupThemeToggle();
 setupAdminPanel();
 setupBotAssistant();
 
-if (botForm) {
-  botForm.addEventListener('submit', handleBotSubmit);
-}
-if (botCloseBtn) {
-  botCloseBtn.addEventListener('click', handleBotClose);
-}
+// Bot legacy hooks (si existen en DOM)
+if (botForm) botForm.addEventListener('submit', handleBotSubmit);
+if (botCloseBtn) botCloseBtn.addEventListener('click', handleBotClose);

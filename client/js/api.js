@@ -48,18 +48,33 @@ export async function registerUser(payload) {
 
 export async function loginUser(payload) {
   try {
-    const res = await fetch(`${AUTH_URL}/login`, {
+    const response = await fetch('/api/auth/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!res.ok) {
-      return { ok: false, message: data?.message };
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        message: data?.message || 'Credenciales inválidas.'
+      };
     }
-    return { ok: true, data };
-  } catch (error) {
-    return { ok: false, message: error.message };
+
+    return {
+      ok: true,
+      data
+    };
+  } catch {
+    return {
+      ok: false,
+      message: 'No se pudo conectar con el servidor.'
+    };
   }
 }
 
@@ -218,11 +233,12 @@ export async function updateMyProfile(token, payload) {
 }
 
 export async function getMyReservations(token) {
-  const res = await fetch('/api/user/my-reservations', {
+  const response = await fetch('/api/user/my-reservations', {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json'
     }
   });
-  return res.json();
+  return response.json();
 }

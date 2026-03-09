@@ -5,6 +5,11 @@ async function purgePastReservations(db) {
   await db.run(`DELETE FROM reservations WHERE date(check_out) < date('now')`);
 }
 
+async function hasColumn(db, table, column) {
+  const cols = await db.all(`PRAGMA table_info(${table})`);
+  return cols.some((c) => c.name === column);
+}
+
 function validateReservationPayload(body) {
   const errors = [];
   const required = ['full_name', 'email', 'check_in', 'check_out', 'guests'];
@@ -40,35 +45,44 @@ export async function createReservation(req, res) {
   }
 
   const { property_id, full_name, email, phone, check_in, check_out, guests } = payload;
+  const userId = req.user?.id || req.user?.userId || req.user?.sub || null;
 
   try {
     const db = await initDB();
 
-    await purgePastReservations(db);
+    // await purgePastReservations(db); // <- DESACTIVADO para conservar historial
 
     if (property_id) {
       const exists = await db.get('SELECT id FROM properties WHERE id = ?', property_id);
-      if (!exists) {
-        return res.status(404).json({ message: 'La propiedad seleccionada no existe.' });
-      }
+      if (!exists) return res.status(404).json({ message: 'La propiedad seleccionada no existe.' });
     }
 
-    const result = await db.run(
-      `INSERT INTO reservations (property_id, full_name, email, phone, check_in, check_out, guests)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`
-      ,
-      property_id || null,
-      full_name,
-      email,
-      phone || null,
-      check_in,
-      check_out,
-      Number(guests)
-    );
+    const supportsUserId = await hasColumn(db, 'reservations', 'user_id');
+
+    const result = supportsUserId
+      ? await db.run(
+          `INSERT INTO reservations (property_id, user_id, full_name, email, phone, check_in, check_out, guests, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))`,
+          [property_id, userId, full_name, email, phone, check_in, check_out, guests]
+        )
+      : await db.run(
+          `INSERT INTO reservations (property_id, full_name, email, phone, check_in, check_out, guests, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))`,
+          [property_id, full_name, email, phone, check_in, check_out, guests]
+        );
 
     return res.status(201).json({
       message: 'Reserva registrada',
-      reservation: { id: result.lastID, property_id: property_id || null, full_name, email, phone, check_in, check_out, guests: Number(guests) }
+      reservation: {
+        id: result.lastID,
+        property_id: property_id || null,
+        full_name,
+        email,
+        phone,
+        check_in,
+        check_out,
+        guests: Number(guests)
+      }
     });
   } catch (error) {
     console.error('Error creando reserva', error);
@@ -80,7 +94,7 @@ export async function listReservations(req, res) {
   const { property_id } = req.query || {};
   try {
     const db = await initDB();
-    await purgePastReservations(db);
+    // await purgePastReservations(db); // <- DESACTIVADO para conservar historial
     let reservations;
     if (property_id) {
       reservations = await db.all(
@@ -88,7 +102,7 @@ export async function listReservations(req, res) {
          FROM reservations r
          LEFT JOIN properties p ON p.id = r.property_id
          WHERE r.property_id = ?
-         ORDER BY r.created_at DESC`,
+         ORDER BY datetime(r.created_at) DESC, r.id DESC`,
         property_id
       );
     } else {
@@ -96,7 +110,7 @@ export async function listReservations(req, res) {
         `SELECT r.*, p.title AS property_title
          FROM reservations r
          LEFT JOIN properties p ON p.id = r.property_id
-         ORDER BY r.created_at DESC`
+         ORDER BY datetime(r.created_at) DESC, r.id DESC`
       );
     }
     return res.json(reservations);
