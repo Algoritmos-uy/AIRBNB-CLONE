@@ -71,7 +71,10 @@ function renderProperties(list = allProperties) {
     <a class="c-property-card" href="property.html?id=${p?.id ?? ''}" title="VEA MAS">
       <img src="${p?.image_url || './assets/img/placeholder.jpg'}" alt="${p?.title || 'Propiedad'}">
       <div class="c-property-card__body">
-        <h3>${p?.title || 'Sin título'}</h3>
+        <h3>
+          ${p?.title || 'Sin título'}
+          <span class="c-property-card__id">ID: ${p?.id ?? '-'}</span>
+        </h3>
         <p>${p?.location || 'Ubicación no disponible'}</p>
         <span>${formatPrice(Number(p?.price_per_night) || 0)} / noche</span>
       </div>
