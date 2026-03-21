@@ -830,11 +830,15 @@ function setupBotAssistant() {
   const closePanel = () => {
     panel.hidden = true;
     launcher.classList.remove('is-open');
+    // mostrar de nuevo el launcher (botón + tooltip)
+    showChatLauncher();
   };
 
   const openPanel = () => {
     panel.hidden = false;
     launcher.classList.add('is-open');
+    // ocultar solo el botón/tooltip del launcher para que no solape el panel
+    hideChatLauncher();
     input.focus();
   };
 
@@ -935,6 +939,20 @@ function setupBotAssistant() {
 
     list.scrollTop = list.scrollHeight;
   });
+}
+
+function hideChatLauncher() {
+  const btn = document.querySelector('.c-chat-launcher__btn');
+  const tooltip = document.querySelector('.c-chat-launcher__tooltip');
+  if (btn) btn.style.display = 'none';
+  if (tooltip) tooltip.style.display = 'none';
+}
+
+function showChatLauncher() {
+  const btn = document.querySelector('.c-chat-launcher__btn');
+  const tooltip = document.querySelector('.c-chat-launcher__tooltip');
+  if (btn) btn.style.display = '';
+  if (tooltip) tooltip.style.display = '';
 }
 
 const userMenuEl = document.getElementById('user-menu');
